@@ -18,3 +18,5 @@ WORKDIR /app
 COPY --from=builder /app/bin/ /app/
 ENTRYPOINT ["/app/main"]
 CMD ["-h"]
+
+LABEL org.opencontainers.image.source=https://github.com/RyuSA/asaamio-updater
