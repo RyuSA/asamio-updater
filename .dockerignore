@@ -1,0 +1,6 @@
+bin
+MakeFile
+README.md
+.credentials
+.devcontainer
+Dockerfile
