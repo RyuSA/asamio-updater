@@ -1,17 +1,18 @@
+include config.env
 
 run: 
 	go run main.go \
 		--channelid UCp-5t9SrOQwXMU7iIjQfARg \
 		--playlistid PLAGlaP7ijaoVpQ9W2I9ixQ77QjICt-NRw \
-		--webhook "https://discord.com/api/webhooks/1090629278997151764/8Y3FRQIemLcIVPn3bYGeaLFWP9xvMPxhEIaVdU797FgoLiy6W1fteVCR-w5fn2vlrVTy"
+		--webhook "$(DISCORD_WEBHOOK)"
 
 init:
 	go run main.go \
 		--phase init \
-		--webhook "https://discord.com/api/webhooks/1090629278997151764/8Y3FRQIemLcIVPn3bYGeaLFWP9xvMPxhEIaVdU797FgoLiy6W1fteVCR-w5fn2vlrVTy"
+		--webhook "$(DISCORD_WEBHOOK)"
 
 build:
-	go build -o bin/ main.go
+	go build -o bin/main main.go
 
 image-build:
-	docker build -t github.com/ryusa/asamio-upodater .
+	docker build -t ghcr.io/ryusa/asamio-updater .
