@@ -47,6 +47,7 @@ func ListAllVideosInPlaylist(ctx context.Context, service *youtube.Service, play
 	return result, nil
 }
 
+// TODO a little bit complicated, I want to devide this function into two smaller functions
 func FilterVideos(service *youtube.Service, keyword string, channelId string) ([]*youtube.SearchResult, error) {
 	r := regexp.MustCompile(keyword)
 	call := service.Search.List([]string{"id", "snippet"})
@@ -103,6 +104,7 @@ func main() {
 	flag.Parse()
 
 	ctx := context.Background()
+
 	if phase == "init" {
 		fmt.Println("initializing the YouTube token")
 		if err := auth.SetUpCredentials(ctx, clientSecretFilePath, tokenCacheFilePath); err != nil {
@@ -154,6 +156,7 @@ func main() {
 			handleError(webhook, err,
 				fmt.Sprintf("Error inserting video %s into playlist %s", candidate.Id.VideoId, asamioPlayListId))
 		}
+		fmt.Printf("Inserted video %s into playlist %s (%d/%d)\n", candidate.Id.VideoId, asamioPlayListId, index, len(updateCandidates))
 	}
 
 	if err := webhook.Do(discord.NewDiscordPayload(fmt.Sprintf("Update %d videos", len(updateCandidates)))); err != nil {
