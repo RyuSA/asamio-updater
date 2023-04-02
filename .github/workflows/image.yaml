@@ -1,4 +1,3 @@
-# Build a Docker image using $PROJECT/Dockerfile and push to GitHub Artifact Registory
 
 name: Create and publish a Docker image
 
